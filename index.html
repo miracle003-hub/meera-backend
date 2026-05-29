@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>MEERA AI Studio — Create. Sell. Grow.</title>
+  <meta name="description" content="Africa's #1 AI creative studio: 38+ tools, marketplace, podcast studio, jobs, quizzes, student hub, comics, trivia and more."/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Separated CSS -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- ══ NOTIFICATION BANNER ══════════════════════════════════ -->
+<div id="notifBanner">
+  <p><strong>🔔 Daily quotes on your phone!</strong> Allow notifications for motivational quotes + Bible verses every morning at 8 AM.</p>
+  <div class="nb-btns">
+    <button class="nb-allow" onclick="requestNotif()">🔔 Allow</button>
+    <button class="nb-dismiss" onclick="dismissNotif()">Later</button>
+  </div>
+</div>
+
+<!-- ══ NAVBAR ═══════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">MEERA<span> AI</span></a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#studio"      onclick="nav('studio')">Studio</a></li>
+      <li><a href="#podcast"     onclick="nav('podcast')">Podcast</a></li>
+      <li><a href="#marketplace" onclick="nav('marketplace')">Market</a></li>
+      <li><a href="#jobs"        onclick="nav('jobs')">Jobs</a></li>
+      <li><a href="#tools-hub"   onclick="nav('tools-hub')">AI Tools</a></li>
+      <li><a href="#quizzes"     onclick="nav('quizzes')">Quizzes</a></li>
+      <li><a href="#blog"        onclick="nav('blog')">Blog</a></li>
+      <li><a href="#student-hub" onclick="nav('student-hub')">Students</a></li>
+      <li><a href="#trivia"      onclick="nav('trivia')">Trivia</a></li>
+      <li><a href="#pricing"     onclick="nav('pricing')">Pricing</a></li>
+    </ul>
+
+    <div class="nav-right" id="navRight">
+      <button id="darkBtn" onclick="toggleDark()">🌙 Dark</button>
+      <button class="btn btn-o btn-sm" onclick="openModal('loginModal')">Login</button>
+      <button class="btn btn-p btn-sm" onclick="openModal('regModal')">Start Free Trial</button>
+    </div>
+    <button class="hamburger" id="burger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO SLIDER ═══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+
+  <!-- Slide 1: AI Studio -->
+  <div class="slide slide-1 active">
+    <div class="slide-content">
+      <p class="slide-tag">✦ Africa's #1 AI Creative Platform</p>
+      <h1>Create. Sell. <span id="heroTyper" style="color:var(--gold)">Grow.</span></h1>
+      <p>38+ AI tools — movies, music, voice cloning, podcast studio, automation and more. Start free for 2 weeks.</p>
+      <div class="slide-acts">
+        <button class="btn btn-p" onclick="openModal('regModal')">🚀 Start Free Trial</button>
+        <button class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)" onclick="openVidModal()">
+          <i class="fa fa-play"></i> Watch Tour
+        </button>
+      </div>
+    </div>
+    <div class="slide-visual">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#3A2A25,#8B5E3C);display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.3">🎬</div>
+      <div class="slide-float">
+        <div style="font-size:11px;opacity:.7;margin-bottom:3px">🎥 Just generated</div>
+        <div style="font-size:15px;font-weight:600">"Afro Love Story" · 3 min</div>
+        <div style="font-size:11px;color:var(--gold);margin-top:5px">⭐ 4.9 · 1.2k views</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2: Podcast Studio -->
+  <div class="slide slide-5">
+    <div class="slide-content">
+      <p class="slide-tag">✦ AI Podcast Studio</p>
+      <h1>Your Full Podcast Studio Powered by AI</h1>
+      <p>AI co-host, auto chapter timestamps, viral clip extraction, thumbnail generator, sound effects, intro music, avatars, and one-click publish to YouTube, TikTok & Facebook.</p>
+      <div class="slide-acts">
+        <button class="btn btn-p" onclick="nav('podcast')">🎙️ Open Studio</button>
+        <button class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)" onclick="openModal('regModal')">Start Free</button>
+      </div>
+    </div>
+    <div class="slide-visual">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0D1A2A,#1A4D7A);display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.3">🎙️</div>
+      <div class="slide-float">
+        <div style="font-size:11px;opacity:.7;margin-bottom:3px">🎙️ Episode published</div>
+        <div style="font-size:15px;font-weight:600">"Tech Africa Ep.12"</div>
+        <div style="font-size:11px;color:var(--gold);margin-top:5px">YouTube · TikTok · Facebook ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Marketplace -->
+  <div class="slide slide-2">
+    <div class="slide-content">
+      <p class="slide-tag">✦ Marketplace</p>
+      <h1>Sell Your AI Creations Worldwide</h1>
+      <p>Upload voice packs, templates, music. Pay with cards, bank transfer, USSD. You keep 80% of every sale.</p>
+      <div class="slide-acts">
+        <button class="btn btn-p" onclick="nav('marketplace')">Browse Market</button>
+        <button class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)" onclick="openModal('vendorModal')">Become Vendor</button>
+      </div>
+    </div>
+    <div class="slide-visual">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#6B3A2A,#D4826A);display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.3">🛍</div>
+      <div class="slide-float">
+        <div style="font-size:11px;opacity:.7;margin-bottom:3px">💰 Sale completed</div>
+        <div style="font-size:15px;font-weight:600">Voice Pack · $24</div>
+        <div style="font-size:11px;color:var(--gold);margin-top:5px">Balance: $192.00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Jobs & Quizzes -->
+  <div class="slide slide-3">
+    <div class="slide-content">
+      <p class="slide-tag">✦ Jobs, Quizzes & Learning</p>
+      <h1>Learn. Test Yourself. Get Hired.</h1>
+      <p>IQ tests, career quizzes, AI resume builder, homework helper, student hub, live blog, AI comics, trivia and a free jobs board — all in one place.</p>
+      <div class="slide-acts">
+        <button class="btn btn-p" onclick="nav('jobs')">Browse Jobs</button>
+        <button class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)" onclick="nav('quizzes')">Take a Quiz</button>
+      </div>
+    </div>
+    <div class="slide-visual">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1E2A1A,#2A6B22);display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.3">🎓</div>
+      <div class="slide-float">
+        <div style="font-size:11px;opacity:.7;margin-bottom:3px">🧠 IQ Test result</div>
+        <div style="font-size:15px;font-weight:600">Score: 127 · Superior</div>
+        <div style="font-size:11px;color:var(--gold);margin-top:5px">Top 12% globally</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Fun & Earn -->
+  <div class="slide slide-4">
+    <div class="slide-content">
+      <p class="slide-tag">✦ Fun & Earn</p>
+      <h1>Spin. Scratch. Compete. Win.</h1>
+      <p>Daily wheel, scratch cards, treasure hunts, creator duels, trivia challenges, AI comics and MEERA coins — the most fun way to earn online.</p>
+      <div class="slide-acts">
+        <button class="btn btn-p" onclick="nav('gamification')">Spin the Wheel</button>
+        <button class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)" onclick="nav('trivia')">Play Trivia</button>
+      </div>
+    </div>
+    <div class="slide-visual">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1A1A35,#4A2B8A);display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.3">🎡</div>
+      <div class="slide-float">
+        <div style="font-size:11px;opacity:.7;margin-bottom:3px">🎉 You won!</div>
+        <div style="font-size:15px;font-weight:600">200 MEERA Coins</div>
+        <div style="font-size:11px;color:var(--gold);margin-top:5px">Daily challenge complete</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: AI Workflow -->
+  <div class="slide slide-6">
+    <div class="slide-content">
+      <p class="slide-tag">✦ AI Workflow Training</p>
+      <h1>Automate Your Business with AI Workflows</h1>
+      <p>Step-by-step guided training on chaining AI tools together. Build content pipelines, marketing systems, and creative automations — no coding needed.</p>
+      <div class="slide-acts">
+        <button class="btn btn-p" onclick="nav('workflow')">Start Training</button>
+        <button class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)" onclick="openModal('regModal')">Join Free</button>
+      </div>
+    </div>
+    <div class="slide-visual">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#2A1A0A,#8B5E3C);display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.3">⚙️</div>
+      <div class="slide-float">
+        <div style="font-size:11px;opacity:.7;margin-bottom:3px">⚙️ Workflow running</div>
+        <div style="font-size:15px;font-weight:600">Movie → Music → Post</div>
+        <div style="font-size:11px;color:var(--gold);margin-top:5px">100% automated ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="sarrow prev" onclick="changeSlide(-1)" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
+  <button class="sarrow next" onclick="changeSlide(1)"  aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+  <div class="slider-dots" id="sliderDots"></div>
+</section>
+
+<!-- Live ticker -->
+<div class="ticker-wrap">
+  <span class="ticker" id="tickerText">
+    🎬 ChidiCreates made an AI movie &nbsp;·&nbsp; 💰 SoundMaster earned $48 &nbsp;·&nbsp; 🎙️ New podcast published to YouTube+TikTok &nbsp;·&nbsp; 🧠 New IQ quiz available &nbsp;·&nbsp; 💼 5 new remote jobs posted &nbsp;·&nbsp; 🎡 AmakaBeats won 200 coins &nbsp;·&nbsp; 🎓 12 students enrolled today &nbsp;·&nbsp;
+  </span>
+</div>
+
+<!-- Ad slot top -->
+<div class="container">
+  <div class="ad-slot" id="adsense-top">
+    📢 Advertisement Space — <em>Replace with your Google AdSense code</em>
+  </div>
+</div>
+
+<!-- ══ STATS COUNTER ══════════════════════════════════════════ -->
+<section class="stats-bg">
+  <div class="container">
+    <div class="stats-cg">
+      <div class="cnt-item"><div class="cnt-num count-up" data-target="12500">0</div><div class="cnt-lbl">Active Creators</div></div>
+      <div class="cnt-item"><div class="cnt-num count-up" data-target="48000">0</div><div class="cnt-lbl">AI Videos Created</div></div>
+      <div class="cnt-item"><div class="cnt-num count-up" data-target="3200">0</div><div class="cnt-lbl">Podcasts Published</div></div>
+      <div class="cnt-item"><div class="cnt-num count-up" data-target="320">0</div><div class="cnt-lbl">Verified Vendors</div></div>
+      <div class="cnt-item"><div class="cnt-num count-up" data-target="5200">0</div><div class="cnt-lbl">Jobs Posted</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ════════════════════════════════════════════════ -->
+<section class="section pricing-bg" id="pricing">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">Plans & Pricing</p>
+      <h2>Pick Your Creative Power</h2>
+      <p>Start free for 2 weeks — no card needed. Upgrade when ready.</p>
+    </div>
+    <div class="price-grid" id="pricingGrid"><!-- JS renders --></div>
+  </div>
+</section>
+
+<!-- ══ AI STUDIO TOOLS ════════════════════════════════════════ -->
+<section class="section" id="studio" style="background:var(--cream)">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">AI Studio</p>
+      <h2>38+ Powerful AI Tools</h2>
+      <p>Movies, music, voice cloning, automation, editing and more.</p>
+    </div>
+    <h3 style="font-size:15px;margin-bottom:14px;color:var(--wood)">🎬 Creative Tools</h3>
+    <div class="tools-grid" id="toolsGrid"></div>
+    <h3 style="font-size:15px;margin:34px 0 14px;color:var(--wood)">📱 Social Media & Automation</h3>
+    <div class="tools-grid" id="socialGrid"></div>
+    <h3 style="font-size:15px;margin:34px 0 14px;color:var(--wood)">✂️ Editing Tools</h3>
+    <div class="tools-grid" id="editGrid"></div>
+  </div>
+</section>
+
+<!-- ══ PODCAST STUDIO ══════════════════════════════════════════ -->
+<section class="section pod-bg" id="podcast">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">AI Podcast Studio</p>
+      <h2>Full Podcast Production in One Place</h2>
+      <p>Record, enhance, publish and grow your podcast with AI — no studio needed.</p>
+    </div>
+
+    <!-- Live podcast player demo -->
+    <div class="pod-player" id="podPlayer">
+      <div class="pod-art" id="podArt">🎙️</div>
+      <div class="pod-pi">
+        <h3 id="podTitle">Tech Africa with MEERA AI · Ep.12</h3>
+        <p id="podDesc">AI co-hosted episode · 42 min · Auto-captioned · Multi-language</p>
+        <div class="pod-ctrl">
+          <button class="pc-btn" onclick="podSeek(-15)" title="Back 15s"><i class="fa fa-rotate-left"></i></button>
+          <button class="pc-btn pc-play" id="podPlayBtn" onclick="togglePod()"><i class="fa fa-play"></i></button>
+          <button class="pc-btn" onclick="podSeek(15)" title="Forward 15s"><i class="fa fa-rotate-right"></i></button>
+          <button class="pc-btn" onclick="togglePodSpeed()" id="podSpeed" title="Playback speed">1×</button>
+          <button class="pc-btn" onclick="showToast('🔇 Muted')" title="Mute"><i class="fa fa-volume-high"></i></button>
+        </div>
+        <div class="pod-prog" onclick="podSeek(0)">
+          <div class="pod-prog-fill" id="podFill"></div>
+        </div>
+        <div class="pod-time"><span id="podCur">0:00</span><span id="podDur">42:18</span></div>
+        <!-- One-click publish buttons with real src targets -->
+        <div class="pub-row">
+          <button class="btn btn-sm btn-yt" onclick="publishPodcast('youtube')">
+            <i class="fab fa-youtube"></i> YouTube
+          </button>
+          <button class="btn btn-sm btn-tt" onclick="publishPodcast('tiktok')">
+            <i class="fab fa-tiktok"></i> TikTok
+          </button>
+          <button class="btn btn-sm btn-fb" onclick="publishPodcast('facebook')">
+            <i class="fab fa-facebook"></i> Facebook
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Podcast feature cards -->
+    <div class="pod-grid" id="podGrid"><!-- JS renders --></div>
+  </div>
+</section>
+
+<!-- ══ EXTRA AI TOOLS HUB ═════════════════════════════════════ -->
+<section class="section atools-bg" id="tools-hub">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">AI Power Tools</p>
+      <h2>Beyond the Studio</h2>
+      <p>Resume builder, logo maker, caption generator, outfit generator, homework helper and more.</p>
+    </div>
+    <div class="atool-grid" id="atoolGrid"><!-- JS renders --></div>
+  </div>
+</section>
+
+<!-- ══ MARKETPLACE ════════════════════════════════════════════ -->
+<section class="section mkt-bg" id="marketplace">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Marketplace</p>
+      <h2>Buy & Sell Creative Assets</h2>
+      <p>Templates, voice packs, music, effects and physical products.</p>
+    </div>
+    <div class="srow">
+      <input type="text" id="mSearch" placeholder="🔍 Search products..." oninput="filterProducts()"/>
+      <select id="mCat" onchange="filterProducts()">
+        <option value="">All Categories</option>
+        <option value="templates">Templates</option>
+        <option value="voice">Voice Packs</option>
+        <option value="effects">Video Effects</option>
+        <option value="music">Music Packs</option>
+        <option value="physical">Physical Products</option>
+      </select>
+      <select id="mSort" onchange="filterProducts()">
+        <option value="">Sort By</option>
+        <option value="price-asc">Price: Low→High</option>
+        <option value="price-desc">Price: High→Low</option>
+        <option value="popular">Most Popular</option>
+      </select>
+    </div>
+    <div class="prod-grid" id="prodGrid"><!-- JS renders --></div>
+    <div class="ad-slot">📢 Mid-page Ad — Replace with Google AdSense code</div>
+  </div>
+</section>
+
+<!-- ══ JOBS BOARD ══════════════════════════════════════════════ -->
+<section class="section jobs-bg" id="jobs">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Jobs & Career</p>
+      <h2>Find Your Next Opportunity</h2>
+      <p>Remote, Nigeria, internships, tech international, creative roles — live from job APIs + curated listings. Free to apply forever.</p>
+    </div>
+
+    <!-- Filter buttons -->
+    <div class="filt-row" id="jobFilters">
+      <button class="flt on" onclick="filterJobs('all',this)">All Jobs</button>
+      <button class="flt" onclick="filterJobs('remote',this)">🌍 Remote</button>
+      <button class="flt" onclick="filterJobs('nigeria',this)">🇳🇬 Nigeria</button>
+      <button class="flt" onclick="filterJobs('internship',this)">🎓 Internships</button>
+      <button class="flt" onclick="filterJobs('tech',this)">💻 Tech (Intl)</button>
+      <button class="flt" onclick="filterJobs('creative',this)">🎨 Creative</button>
+    </div>
+
+    <!-- Search -->
+    <div class="srow" style="margin-bottom:22px">
+      <input type="text" id="jobSearch" placeholder="🔍 Search jobs, companies, skills..." oninput="searchJobs()"/>
+      <select id="jobLevel" onchange="searchJobs()">
+        <option value="">Any Level</option>
+        <option value="entry">Entry Level</option>
+        <option value="mid">Mid Level</option>
+        <option value="senior">Senior Level</option>
+      </select>
+    </div>
+
+    <div id="jobLoading" style="text-align:center;padding:18px;color:var(--muted);font-size:13px">⏳ Loading live jobs…</div>
+    <div class="job-list" id="jobList"></div>
+
+    <!-- Job alert signup box -->
+    <div style="background:var(--cream);border-radius:var(--r3);padding:24px;margin-top:30px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:var(--sh)">
+      <div style="flex:1;min-width:180px">
+        <h3 style="font-size:17px;margin-bottom:5px">🔔 Job Alerts</h3>
+        <p style="font-size:12px;color:var(--muted)">Get notified the moment your dream job is posted. Set your preferences once.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0">
+        <input type="email" id="alertEmail" placeholder="your@email.com" style="padding:9px 15px;border-radius:99px;border:1.5px solid rgba(139,94,60,.22);background:var(--cream-d);color:var(--text);font-size:12px;outline:none;min-width:180px"/>
+        <select id="alertType" style="padding:9px 15px;border-radius:99px;border:1.5px solid rgba(139,94,60,.22);background:var(--cream-d);color:var(--text);font-size:12px;outline:none">
+          <option>All Jobs</option><option>Remote Only</option><option>Nigeria Jobs</option>
+          <option>Tech Jobs</option><option>Internships</option>
+        </select>
+        <button class="btn btn-p btn-sm" onclick="subscribeAlert()">🔔 Set Alert</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUIZZES & PERSONALITY TESTS ════════════════════════════ -->
+<section class="section quiz-bg" id="quizzes">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">Quizzes & Tests</p>
+      <h2>Discover Yourself</h2>
+      <p>Career, IQ, personality, relationship, business and skill tests — all free.</p>
+    </div>
+    <div class="qcat-grid" id="qcatGrid"><!-- JS renders --></div>
+    <div class="quiz-box" id="quizBox" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <span id="quizTitle" style="font-size:13px;font-weight:600;color:var(--wood)">Quiz</span>
+        <span id="quizCounter" style="font-size:11px;color:var(--muted)">Q 1/10</span>
+      </div>
+      <div class="qprog"><div class="qpfill" id="qpfill" style="width:10%"></div></div>
+      <div class="qtext" id="qtext">Loading...</div>
+      <div class="qopts" id="qopts"></div>
+      <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+        <button class="btn btn-o btn-sm" onclick="closeQuiz()">← Categories</button>
+        <button class="btn btn-p btn-sm" id="nextQBtn" onclick="nextQ()" style="display:none">Next →</button>
+      </div>
+    </div>
+    <div class="q-result" id="qResult" style="display:none">
+      <div class="q-rscore" id="qScore">8/10</div>
+      <h3 id="qResTitle" style="margin:11px 0 7px">Excellent!</h3>
+      <p id="qResDesc" style="color:var(--muted);font-size:13px;line-height:1.7;max-width:460px;margin:0 auto 22px"></p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-p btn-sm" onclick="retakeQuiz()">🔁 Retake</button>
+        <button class="btn btn-o btn-sm" onclick="shareResult()">📤 Share Result</button>
+        <button class="btn btn-o btn-sm" onclick="closeQuiz()">Browse Quizzes</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INTERACTIVE CALCULATORS ════════════════════════════════ -->
+<section class="section calc-bg" id="calculators">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Interactive Calculators</p>
+      <h2>Plan. Calculate. Decide.</h2>
+      <p>Earnings, savings, BMI, loan, freelance rate and GPA calculators — all interactive.</p>
+    </div>
+    <div class="ctabs" id="calcTabs">
+      <button class="ctab on" onclick="switchCalc('earnings',this)">💰 Earnings</button>
+      <button class="ctab" onclick="switchCalc('savings',this)">🏦 Savings</button>
+      <button class="ctab" onclick="switchCalc('bmi',this)">⚖️ BMI</button>
+      <button class="ctab" onclick="switchCalc('loan',this)">🏠 Loan</button>
+      <button class="ctab" onclick="switchCalc('freelance',this)">💼 Freelance</button>
+      <button class="ctab" onclick="switchCalc('gpa',this)">📚 GPA</button>
+    </div>
+
+    <!-- Earnings Calculator -->
+    <div class="cpanel on" id="calc-earnings">
+      <div class="calc-card">
+        <h3 style="margin-bottom:18px;font-size:17px">MEERA Vendor Earnings Estimator</h3>
+        <div class="crow"><label>Products listed</label><input type="range" id="c-prods" min="1" max="20" value="5" oninput="calcEarnings()"><span class="cval" id="v-prods">5</span></div>
+        <div class="crow"><label>Avg price ($)</label><input type="range" id="c-price" min="5" max="100" value="20" oninput="calcEarnings()"><span class="cval" id="v-price">$20</span></div>
+        <div class="crow"><label>Sales/product/mo</label><input type="range" id="c-sales" min="1" max="50" value="10" oninput="calcEarnings()"><span class="cval" id="v-sales">10</span></div>
+        <div class="crow"><label>Monthly referrals</label><input type="range" id="c-refs" min="0" max="50" value="5" oninput="calcEarnings()"><span class="cval" id="v-refs">5</span></div>
+        <div class="cres-grid">
+          <div class="cres-item"><div class="cres-v" id="r-prod">$800</div><div class="cres-l">Product sales (80%)</div></div>
+          <div class="cres-item"><div class="cres-v" id="r-ref">$10</div><div class="cres-l">Referrals</div></div>
+          <div class="cres-item"><div class="cres-v" id="r-total">$810</div><div class="cres-l">Gross monthly</div></div>
+          <div class="cres-item"><div class="cres-v" id="r-net">$804</div><div class="cres-l">Net (after fee)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Savings Calculator -->
+    <div class="cpanel" id="calc-savings">
+      <div class="calc-card">
+        <h3 style="margin-bottom:18px;font-size:17px">Compound Savings Calculator</h3>
+        <div class="crow"><label>Monthly savings ($)</label><input type="number" id="s-mo" value="100" oninput="calcSavings()"></div>
+        <div class="crow"><label>Interest rate (%)</label><input type="range" id="s-rate" min="1" max="20" value="8" step="0.5" oninput="calcSavings()"><span class="cval" id="sv-rate">8%</span></div>
+        <div class="crow"><label>Years</label><input type="range" id="s-yr" min="1" max="40" value="10" oninput="calcSavings()"><span class="cval" id="sv-yr">10</span></div>
+        <div class="cres-grid">
+          <div class="cres-item"><div class="cres-v" id="s-dep">$12,000</div><div class="cres-l">Total deposited</div></div>
+          <div class="cres-item"><div class="cres-v" id="s-int">$6,136</div><div class="cres-l">Interest earned</div></div>
+          <div class="cres-item"><div class="cres-v" id="s-fin">$18,136</div><div class="cres-l">Final balance</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BMI Calculator -->
+    <div class="cpanel" id="calc-bmi">
+      <div class="calc-card">
+        <h3 style="margin-bottom:18px;font-size:17px">BMI Calculator</h3>
+        <div class="crow"><label>Weight (kg)</label><input type="number" id="b-wt" value="70" oninput="calcBMI()"></div>
+        <div class="crow"><label>Height (cm)</label><input type="number" id="b-ht" value="175" oninput="calcBMI()"></div>
+        <div class="cres-grid">
+          <div class="cres-item"><div class="cres-v" id="bmi-v">22.9</div><div class="cres-l">Your BMI</div></div>
+          <div class="cres-item"><div class="cres-v" id="bmi-c">Normal</div><div class="cres-l">Category</div></div>
+          <div class="cres-item"><div class="cres-v" id="bmi-i">63–79 kg</div><div class="cres-l">Ideal range</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loan Calculator -->
+    <div class="cpanel" id="calc-loan">
+      <div class="calc-card">
+        <h3 style="margin-bottom:18px;font-size:17px">Loan Repayment Calculator</h3>
+        <div class="crow"><label>Loan amount ($)</label><input type="number" id="l-amt" value="5000" oninput="calcLoan()"></div>
+        <div class="crow"><label>Annual interest (%)</label><input type="range" id="l-rate" min="1" max="30" value="12" step="0.5" oninput="calcLoan()"><span class="cval" id="lv-r">12%</span></div>
+        <div class="crow"><label>Term (months)</label><input type="range" id="l-mo" min="3" max="120" value="24" oninput="calcLoan()"><span class="cval" id="lv-m">24 mo</span></div>
+        <div class="cres-grid">
+          <div class="cres-item"><div class="cres-v" id="l-pay">$235</div><div class="cres-l">Monthly payment</div></div>
+          <div class="cres-item"><div class="cres-v" id="l-tot">$5,640</div><div class="cres-l">Total repaid</div></div>
+          <div class="cres-item"><div class="cres-v" id="l-int">$640</div><div class="cres-l">Total interest</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Freelance Rate Calculator -->
+    <div class="cpanel" id="calc-freelance">
+      <div class="calc-card">
+        <h3 style="margin-bottom:18px;font-size:17px">Freelance Rate Calculator</h3>
+        <div class="crow"><label>Desired monthly ($)</label><input type="number" id="f-inc" value="2000" oninput="calcFreelance()"></div>
+        <div class="crow"><label>Billable hrs/week</label><input type="range" id="f-hrs" min="5" max="40" value="25" oninput="calcFreelance()"><span class="cval" id="fv-h">25</span></div>
+        <div class="crow"><label>Monthly expenses ($)</label><input type="number" id="f-exp" value="300" oninput="calcFreelance()"></div>
+        <div class="cres-grid">
+          <div class="cres-item"><div class="cres-v" id="f-min">$22</div><div class="cres-l">Min hourly rate</div></div>
+          <div class="cres-item"><div class="cres-v" id="f-rec">$30</div><div class="cres-l">Recommended</div></div>
+          <div class="cres-item"><div class="cres-v" id="f-ann">$24,000</div><div class="cres-l">Annual target</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GPA Calculator -->
+    <div class="cpanel" id="calc-gpa">
+      <div class="calc-card">
+        <h3 style="margin-bottom:18px;font-size:17px">GPA / CGPA Calculator (5.0 scale)</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Add each course grade and credit unit.</p>
+        <div id="gpaRows">
+          <div class="crow" style="gap:7px">
+            <input type="text" placeholder="Course" style="flex:2;padding:8px 10px;border-radius:var(--r1);border:1.5px solid rgba(139,94,60,.2);background:var(--cream-d);color:var(--text);font-size:12px;outline:none">
+            <select onchange="calcGPA()" class="gsel" style="padding:8px 10px;border-radius:var(--r1);border:1.5px solid rgba(139,94,60,.2);background:var(--cream-d);color:var(--text);font-size:12px;outline:none">
+              <option>A (5.0)</option><option>B (4.0)</option><option>C (3.0)</option><option>D (2.0)</option><option>F (0.0)</option>
+            </select>
+            <input type="number" placeholder="Units" min="1" max="6" value="3" oninput="calcGPA()" class="uinp" style="width:65px;padding:8px 10px;border-radius:var(--r1);border:1.5px solid rgba(139,94,60,.2);background:var(--cream-d);color:var(--text);font-size:12px;outline:none">
+          </div>
+        </div>
+        <button class="btn btn-o btn-sm" onclick="addGPARow()" style="margin-top:10px">+ Add Course</button>
+        <div class="cres-grid" style="margin-top:14px">
+          <div class="cres-item"><div class="cres-v" id="gpa-v">5.00</div><div class="cres-l">Your GPA</div></div>
+          <div class="cres-item"><div class="cres-v" id="gpa-cl">First Class</div><div class="cres-l">Degree Class</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LIVE BLOG ════════════════════════════════════════════════ -->
+<section class="section blog-bg" id="blog">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Live News & Educational Blog</p>
+      <h2>Stay Informed. Keep Learning.</h2>
+      <p>AI news, tutorials, creator tips, career guides and business insights — updated daily.</p>
+    </div>
+    <div class="filt-row" id="blogFilters">
+      <button class="flt on" onclick="filterBlog('all',this)">All</button>
+      <button class="flt" onclick="filterBlog('ai-news',this)">🤖 AI News</button>
+      <button class="flt" onclick="filterBlog('tutorial',this)">📖 Tutorials</button>
+      <button class="flt" onclick="filterBlog('career',this)">💼 Career</button>
+      <button class="flt" onclick="filterBlog('creator',this)">🎬 Creator</button>
+      <button class="flt" onclick="filterBlog('business',this)">📈 Business</button>
+    </div>
+    <div class="blog-grid" id="blogGrid"></div>
+    <div style="text-align:center;margin-top:28px">
+      <button class="btn btn-o" onclick="loadMoreBlog()">Load More Articles →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STUDENT HUB ═════════════════════════════════════════════ -->
+<section class="section hub-bg" id="student-hub">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">Student Hub</p>
+      <h2>Everything Students Need</h2>
+      <p>Homework help, AI tools, career prep, study aids and more — built for students.</p>
+    </div>
+    <div class="hub-grid" id="hubGrid"></div>
+  </div>
+</section>
+
+<!-- ══ AI COMICS ════════════════════════════════════════════════ -->
+<section class="section comics-bg" id="comics">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">AI Comics</p>
+      <h2>Generate Your Own AI Comic Strip</h2>
+      <p>Describe your story and watch MEERA build a comic panel by panel.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:26px;align-items:start">
+      <div class="form-card" style="max-width:100%">
+        <h3 style="margin-bottom:14px;font-size:15px">Create Your Comic</h3>
+        <div class="fg"><label>Story Prompt</label><textarea id="comicPrompt" placeholder="A young Nigerian girl discovers AI superpowers..." rows="4"></textarea></div>
+        <div class="fg"><label>Genre</label>
+          <select id="comicGenre">
+            <option>Afro-Futurism</option><option>Action Adventure</option><option>Comedy</option>
+            <option>Educational</option><option>Romance</option><option>Superhero</option>
+          </select>
+        </div>
+        <div class="fg"><label>Panels</label>
+          <select id="comicPanels"><option value="3">3 Panels</option><option value="4" selected>4 Panels</option><option value="6">6 Panels</option></select>
+        </div>
+        <button class="btn btn-p btn-full" onclick="genComic()">🎨 Generate Comic</button>
+      </div>
+      <div>
+        <div class="comic-strip" id="comicStrip">
+          <div class="cpanel-c"><div class="cart">👧🏾</div><div class="bubble">I have a dream to use AI and change Africa!</div></div>
+          <div class="cpanel-c"><div class="cart">💻✨</div><div class="bubble">She opened MEERA and typed her first prompt…</div></div>
+          <div class="cpanel-c"><div class="cart">🎬🌍</div><div class="bubble">A movie was born. 1M views in 24 hours.</div></div>
+          <div class="cpanel-c"><div class="cart">🏆💰</div><div class="bubble">$5,000 earned in month one. Her village celebrated!</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="btn btn-o btn-sm" onclick="dlComic()">💾 Download</button>
+          <button class="btn btn-o btn-sm" onclick="shareComic()">📤 Share</button>
+          <button class="btn btn-p btn-sm" onclick="genComic()">🔄 Regenerate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRIVIA CHALLENGES ════════════════════════════════════════ -->
+<section class="section trivia-bg" id="trivia">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">Trivia Challenges</p>
+      <h2>Test Your Knowledge. Win Coins.</h2>
+      <p>Daily trivia across tech, Africa, AI, history, science and pop culture.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:26px;align-items:start">
+      <div>
+        <div class="trivia-card" id="triviaCard">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <span id="triviaCat" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--wood)">🤖 AI & Tech</span>
+            <div style="display:flex;align-items:center;gap:9px">
+              <span id="triviaScore" style="font-size:12px;font-weight:700;color:var(--gold)">Score: 0</span>
+              <span id="triviaTimer" style="background:var(--blush-d);color:#fff;padding:3px 11px;border-radius:99px;font-size:12px;font-weight:700">15s</span>
+            </div>
+          </div>
+          <h3 id="triviaQ" style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:18px;line-height:1.5">What does "AI" stand for in technology?</h3>
+          <div class="qopts" id="triviaOpts"></div>
+          <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+            <button class="btn btn-p btn-sm" id="nextTrivBtn" onclick="nextTrivia()" style="display:none">Next →</button>
+            <button class="btn btn-o btn-sm" onclick="skipTrivia()">Skip</button>
+          </div>
+        </div>
+        <div style="margin-top:18px">
+          <h3 style="font-size:15px;margin-bottom:12px;color:var(--wood)">🏆 Today's Top Scorers</h3>
+          <ul class="lb-list" id="triviaLB"></ul>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:15px;margin-bottom:12px;color:var(--wood)">📚 Categories</h3>
+        <div id="triviaCatList"></div>
+        <div style="margin-top:18px;background:var(--cream);border-radius:var(--r2);padding:16px;text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--wood)" id="myTrivScore">0</div>
+          <div style="font-size:11px;color:var(--muted)">Your total score today</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gold);margin-top:3px" id="triviaCoinWon">0 coins earned</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AI WORKFLOW TRAINING ════════════════════════════════════ -->
+<section class="section wf-bg" id="workflow">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">AI Workflow Training</p>
+      <h2>Build AI Automations Step by Step</h2>
+      <p>Chain AI tools together to automate your content, marketing, and creative business. No coding needed.</p>
+    </div>
+    <div class="wf-grid" id="wfGrid"></div>
+  </div>
+</section>
+
+<!-- ══ GAMIFICATION ════════════════════════════════════════════ -->
+<section class="section game-bg" id="gamification">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Earn & Compete</p>
+      <h2>MEERA Coins & Rewards</h2>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-card"><div class="snum" id="userCoins">0</div><div class="slbl">Your Coins</div></div>
+      <div class="stat-card"><div class="snum">12,450</div><div class="slbl">Community Coins</div></div>
+      <div class="stat-card"><div class="snum">342</div><div class="slbl">Active Creators</div></div>
+      <div class="stat-card"><div class="snum">28</div><div class="slbl">Daily Challenges</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start">
+      <div style="text-align:center">
+        <h3 style="margin-bottom:16px;font-size:15px">🎡 Daily Spin-to-Win</h3>
+        <canvas id="spinWheel" width="270" height="270" style="border-radius:50%;border:6px solid var(--wood);box-shadow:0 0 40px rgba(139,94,60,.3)"></canvas><br>
+        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">SPIN NOW</button>
+        <p id="spinResult" style="margin-top:12px;font-weight:600;color:var(--wood)"></p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:16px;font-size:15px">🏆 Creator Leaderboard</h3>
+        <ul class="lb-list" id="leaderboard"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DAILY QUOTES ════════════════════════════════════════════ -->
+<section class="section quote-bg" id="quotes">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye" style="color:var(--gold)">Daily Inspiration</p>
+      <h2 style="color:#fff">Your Daily Quote & Bible Verse</h2>
+      <p style="color:rgba(255,255,255,.6)">Delivered to your phone automatically every morning.</p>
+    </div>
+    <div class="qtabs">
+      <button class="qtab on" onclick="switchQTab('motivation',this)">✨ Motivational</button>
+      <button class="qtab" onclick="switchQTab('bible',this)">📖 Bible</button>
+      <button class="qtab" onclick="switchQTab('success',this)">💰 Success</button>
+      <button class="qtab" onclick="switchQTab('creative',this)">🎨 Creative</button>
+    </div>
+    <div class="q-disp">
+      <blockquote id="mainQ">"The secret of getting ahead is getting started."</blockquote>
+      <div class="qref" id="mainQRef">— Mark Twain</div>
+      <div class="q-acts">
+        <button class="qa-btn" onclick="shareQMain()">📤 Share</button>
+        <button class="qa-btn" onclick="copyQMain()">📋 Copy</button>
+        <button class="qa-btn" onclick="openModal('regModal')">🔔 Daily Alerts</button>
+        <button class="qn-btn" onclick="nextQMain()">Next →</button>
+      </div>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:right;margin-top:10px" id="qCounter">Quote 1 of 8</div>
+  </div>
+</section>
+
+<!-- ══ MISSIONS ════════════════════════════════════════════════ -->
+<section class="section miss-bg" id="missions">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Daily Missions</p>
+      <h2>Complete Quests. Earn More.</h2>
+      <p>Resets every midnight. Complete all to earn a 500-coin bonus.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <h3 style="font-size:14px;margin-bottom:12px;color:var(--wood)">🎯 Today's Missions</h3>
+        <div class="miss-list" id="missList"></div>
+      </div>
+      <div>
+        <h3 style="font-size:14px;margin-bottom:12px;color:var(--wood)">🏆 Vendor Missions</h3>
+        <div class="miss-list" id="vendorMissList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VENDOR UPLOAD ═══════════════════════════════════════════ -->
+<section class="section" id="vendor" style="background:var(--cream-d)">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">For Vendors</p>
+      <h2>Upload Your Products</h2>
+      <p>List digital or physical products. First month free — then $6/month to stay visible.</p>
+    </div>
+    <div class="form-card">
+      <div class="f2col">
+        <div class="fg"><label>Product Name</label><input type="text" id="prodName" placeholder="e.g. Afro Voice Pack Vol.1"/></div>
+        <div class="fg"><label>Category</label>
+          <select id="prodCat">
+            <option>Templates</option><option>Voice Packs</option><option>Video Effects</option>
+            <option>Music Packs</option><option>Physical Product</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Description</label><textarea id="prodDesc" placeholder="Describe what buyers get..."></textarea></div>
+      <div class="f2col">
+        <div class="fg"><label>Price ($)</label><input type="number" id="prodPrice" placeholder="24" min="1"/></div>
+        <div class="fg"><label>WhatsApp (physical)</label><input type="text" id="prodWA" placeholder="+234..."/></div>
+      </div>
+      <div class="f2col">
+        <div class="fg"><label>Social Media 1</label><input type="text" id="soc1" placeholder="https://instagram.com/..."/></div>
+        <div class="fg"><label>Social Media 2</label><input type="text" id="soc2" placeholder="https://tiktok.com/@..."/></div>
+      </div>
+      <div class="fg">
+        <label>Product Image</label>
+        <div class="upload-area" onclick="document.getElementById('prodImg').click()">
+          <i class="fa fa-cloud-upload-alt"></i>
+          <p>Click to upload image (JPG, PNG)</p>
+          <p id="imgFN" style="margin-top:5px;color:var(--wood);font-size:11px"></p>
+          <input type="file" id="prodImg" accept="image/*" onchange="showFN(this,'imgFN')"/>
+        </div>
+      </div>
+      <button class="btn btn-p btn-full" style="padding:13px" onclick="submitProd()">
+        <i class="fa fa-upload"></i> Submit for Review
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VENDOR DASHBOARD ════════════════════════════════════════ -->
+<section class="section dash-bg" id="dashboard">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Vendor Dashboard</p>
+      <h2>Manage Your Business</h2>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-side">
+        <ul class="dnav">
+          <li class="ditem on" onclick="showPanel('overview')"><i class="fa fa-chart-bar"></i> Overview</li>
+          <li class="ditem" onclick="showPanel('products')"><i class="fa fa-box"></i> My Products</li>
+          <li class="ditem" onclick="showPanel('earnings')"><i class="fa fa-wallet"></i> Earnings & Payout</li>
+          <li class="ditem" onclick="showPanel('analytics')"><i class="fa fa-chart-line"></i> Analytics</li>
+          <li class="ditem" onclick="showPanel('affiliate')"><i class="fa fa-users"></i> Affiliate</li>
+        </ul>
+      </div>
+      <div class="dash-main">
+        <div class="dash-panel" id="panel-overview">
+          <h3 style="margin-bottom:16px">Overview</h3>
+          <div class="stat-bar">
+            <div class="stat-card"><div class="snum">$480</div><div class="slbl">Total Earnings</div></div>
+            <div class="stat-card"><div class="snum">24</div><div class="slbl">Products Sold</div></div>
+            <div class="stat-card"><div class="snum">1,240</div><div class="slbl">Views</div></div>
+            <div class="stat-card"><div class="snum">$120</div><div class="slbl">Pending Payout</div></div>
+          </div>
+        </div>
+        <div class="dash-panel" id="panel-products" style="display:none">
+          <h3 style="margin-bottom:12px">My Products</h3>
+          <p style="color:var(--muted);font-size:13px">Your approved products appear here after admin review.</p>
+        </div>
+        <div class="dash-panel" id="panel-earnings" style="display:none">
+          <h3 style="margin-bottom:14px">Earnings & Payout</h3>
+          <div class="stat-bar" style="margin-bottom:18px">
+            <div class="stat-card"><div class="snum">$360</div><div class="slbl">Available</div></div>
+            <div class="stat-card"><div class="snum">$120</div><div class="slbl">Pending</div></div>
+          </div>
+          <div class="fg"><label>Payout Amount ($)</label><input type="number" id="payoutAmt" placeholder="Min $10" min="10"/></div>
+          <div class="fg"><label>Method</label>
+            <select><option>Paystack Bank Transfer</option><option>Direct Bank Transfer</option></select>
+          </div>
+          <button class="btn btn-p" onclick="reqPayout()">Request Payout</button>
+        </div>
+        <div class="dash-panel" id="panel-analytics" style="display:none">
+          <h3 style="margin-bottom:12px">Analytics</h3>
+          <canvas id="analyticsChart" height="120"></canvas>
+        </div>
+        <div class="dash-panel" id="panel-affiliate" style="display:none">
+          <h3 style="margin-bottom:12px">Affiliate Referral</h3>
+          <div style="background:var(--cream-d);padding:12px 14px;border-radius:var(--r1);display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+            <span id="refLink" style="font-size:12px;flex:1">https://meera.ai/ref/<strong>YOUR_CODE</strong></span>
+            <button class="btn btn-o btn-sm" onclick="copyRef()">Copy</button>
+          </div>
+          <p style="font-size:12px;color:var(--muted)">Referred: <strong>3 users</strong> · Commission: <strong style="color:var(--wood)">$14.40</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADMIN PANEL ══════════════════════════════════════════════ -->
+<section class="section" id="admin" style="background:var(--cream)">
+  <div class="container">
+    <div class="sh-wrap">
+      <p class="eye">Admin Panel</p>
+      <h2>Manage Vendors & Products</h2>
+    </div>
+    <div class="dash-panel">
+      <h3 style="margin-bottom:16px">Pending Vendor Applications</h3>
+      <div style="overflow-x:auto">
+        <table class="adm-table">
+          <thead><tr>
+            <th>Name</th><th>Email</th><th>Social 1</th><th>Social 2</th><th>Status</th><th>Action</th>
+          </tr></thead>
+          <tbody id="vendorTBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ════════════════════════════════════════════ -->
+<section class="section hiw-bg" id="howitworks">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">Simple as 1-2-3</p>
+      <h2>How MEERA Works</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="sn">1</div><h4>Sign Up Free</h4><p>Create account. 2 weeks free. No card needed.</p></div>
+      <div class="step-card"><div class="sn">2</div><h4>Create with AI</h4><p>38+ tools for movies, music, podcast, voices and more.</p></div>
+      <div class="step-card"><div class="sn">3</div><h4>Sell & Earn</h4><p>List products, refer friends, teach courses, win trivia.</p></div>
+      <div class="step-card"><div class="sn">4</div><h4>Grow & Compete</h4><p>Earn coins, climb the leaderboard, win daily challenges.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ════════════════════════════════════════════ -->
+<section class="section test-bg">
+  <div class="container">
+    <div class="sh-wrap tc">
+      <p class="eye">What Creators Say</p>
+      <h2>Loved by Thousands</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card"><div class="tstars">★★★★★</div><p class="ttext">"I made my first AI movie in 30 minutes and my first podcast went viral on TikTok the same week. MEERA is unbelievable!"</p><div class="tauth"><div class="tav">🎬</div><div><div class="tname">Chidi Okafor</div><div class="trole">AI Filmmaker, Lagos</div></div></div></div>
+      <div class="test-card"><div class="tstars">★★★★★</div><p class="ttext">"I've earned $1,200 selling voice packs in 3 months. The one-click publish to YouTube is a game changer for my podcast."</p><div class="tauth"><div class="tav">🎙️</div><div><div class="tname">Amaka Williams</div><div class="trole">Voice Artist & Podcaster</div></div></div></div>
+      <div class="test-card"><div class="tstars">★★★★★</div><p class="ttext">"Found my remote tech job through the MEERA board. The IQ quiz was so accurate it shocked me. This platform changed my life."</p><div class="tauth"><div class="tav">💼</div><div><div class="tname">Tunde Adeyemi</div><div class="trole">Remote Developer</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══════════════════════════════════════════════════════ -->
+<section class="section faq-bg" id="faq">
+  <div class="container">
+    <div class="sh-wrap tc"><p class="eye">FAQ</p><h2>Common Questions</h2></div>
+    <div style="max-width:680px;margin:0 auto" id="faqList">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)">Do I need a credit card for the free trial? <span class="faq-ico">+</span></div><div class="faq-a">No card needed. 2-week free trial starts immediately. You only pay when you choose to upgrade.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)">What payment methods are accepted? <span class="faq-ico">+</span></div><div class="faq-a">Visa, Mastercard, Verve, bank transfer, USSD, mobile money — all via Paystack. Global cards accepted.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)">How do podcast uploads to YouTube/TikTok/Facebook work? <span class="faq-ico">+</span></div><div class="faq-a">After recording or editing your podcast, click the platform button (YouTube, TikTok, Facebook). MEERA authenticates with the platform API and uploads with your title, thumbnail and description automatically. Requires Pro plan.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)">Are quizzes and trivia free? <span class="faq-ico">+</span></div><div class="faq-a">Yes — all quizzes, personality tests, IQ tests and trivia are free forever for all users.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)">How does the jobs board work? <span class="faq-ico">+</span></div><div class="faq-a">Jobs are pulled from live APIs (Remotive, Adzuna) plus curated local listings. Filter by remote, Nigeria, internship or tech. Apply directly. Set email alerts for new jobs in your category.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)">How do vendors get paid? <span class="faq-ico">+</span></div><div class="faq-a">Vendors earn 80% per sale. Withdraw anytime to your bank account via Paystack. Processed within 24–48 hours.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo" style="margin-bottom:13px;color:#fff">MEERA<span style="color:#D4826A"> AI</span></div>
+        <p>Africa's most powerful AI creative studio, podcast platform, marketplace and learning hub. Create. Sell. Grow.</p>
+        <div class="f-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>AI Studio</h4>
+        <ul>
+          <li><a href="#studio" onclick="nav('studio')">AI Movie Maker</a></li>
+          <li><a href="#podcast" onclick="nav('podcast')">Podcast Studio</a></li>
+          <li><a href="#tools-hub" onclick="nav('tools-hub')">AI Resume Builder</a></li>
+          <li><a href="#tools-hub" onclick="nav('tools-hub')">AI Logo Maker</a></li>
+          <li><a href="#tools-hub" onclick="nav('tools-hub')">Outfit Generator</a></li>
+          <li><a href="#tools-hub" onclick="nav('tools-hub')">AI Caption Gen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Learn & Earn</h4>
+        <ul>
+          <li><a href="#quizzes" onclick="nav('quizzes')">Quizzes & Tests</a></li>
+          <li><a href="#trivia" onclick="nav('trivia')">Trivia Challenges</a></li>
+          <li><a href="#blog" onclick="nav('blog')">Live Blog</a></li>
+          <li><a href="#student-hub" onclick="nav('student-hub')">Student Hub</a></li>
+          <li><a href="#comics" onclick="nav('comics')">AI Comics</a></li>
+          <li><a href="#calculators" onclick="nav('calculators')">Calculators</a></li>
+          <li><a href="#workflow" onclick="nav('workflow')">AI Workflow Training</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#pricing" onclick="nav('pricing')">Pricing</a></li>
+          <li><a href="#jobs" onclick="nav('jobs')">Jobs Board</a></li>
+          <li><a href="#marketplace" onclick="nav('marketplace')">Marketplace</a></li>
+          <li><a href="#gamification" onclick="nav('gamification')">Leaderboard</a></li>
+          <li><a href="#" onclick="openVidModal()">Watch Tour ▶</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2024 MEERA AI Studio. All rights reserved.</span>
+      <span>Made with ❤️ for creators everywhere &nbsp;·&nbsp; <a href="#" onclick="openVidModal()" style="color:var(--gold)">▶ Watch Tour</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ MODALS ═══════════════════════════════════════════════════ -->
+<!-- Login -->
+<div class="modal-ov" id="loginModal">
+  <div class="modal-box">
+    <button class="m-close" onclick="closeModal('loginModal')">✕</button>
+    <h2>Welcome Back</h2><p class="sub">Log in to your MEERA account</p>
+    <div class="fg"><label>Email</label><input type="email" id="loginEmail" placeholder="you@email.com"/></div>
+    <div class="fg"><label>Password</label><input type="password" id="loginPw" placeholder="••••••••"/></div>
+    <button class="btn btn-p btn-full" style="margin-top:5px" onclick="loginUser()">Log In</button>
+    <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--muted)">No account? <a href="#" style="color:var(--wood);font-weight:600" onclick="switchModal('loginModal','regModal')">Sign up free</a></p>
+  </div>
+</div>
+
+<!-- Register -->
+<div class="modal-ov" id="regModal">
+  <div class="modal-box">
+    <button class="m-close" onclick="closeModal('regModal')">✕</button>
+    <h2>Start Free Trial</h2><p class="sub">2 weeks free. No credit card needed.</p>
+    <div class="fg"><label>Full Name</label><input type="text" id="regName" placeholder="Your Name"/></div>
+    <div class="fg"><label>Email</label><input type="email" id="regEmail" placeholder="you@email.com"/></div>
+    <div class="fg"><label>Password</label><input type="password" id="regPw" placeholder="Min 8 characters"/></div>
+    <div class="fg"><label>Referral Code (optional)</label><input type="text" id="regRef" placeholder="MEERA1234"/></div>
+    <button class="btn btn-p btn-full" style="margin-top:5px" onclick="registerUser()">Create Free Account</button>
+  </div>
+</div>
+
+<!-- Vendor apply -->
+<div class="modal-ov" id="vendorModal">
+  <div class="modal-box">
+    <button class="m-close" onclick="closeModal('vendorModal')">✕</button>
+    <h2>Become a Vendor</h2><p class="sub">First month free, then $6/month to stay listed.</p>
+    <div class="fg"><label>Full Name</label><input type="text" id="vName" placeholder="Your Name"/></div>
+    <div class="fg"><label>Email</label><input type="email" id="vEmail" placeholder="you@email.com"/></div>
+    <div class="fg"><label>Social Link 1</label><input type="text" id="vSoc1" placeholder="Instagram, TikTok…"/></div>
+    <div class="fg"><label>Social Link 2</label><input type="text" id="vSoc2" placeholder="YouTube, Twitter…"/></div>
+    <button class="btn btn-p btn-full" style="margin-top:5px" onclick="applyVendor()">Submit Application</button>
+  </div>
+</div>
+
+<!-- Product detail -->
+<div class="modal-ov" id="prodModal">
+  <div class="modal-box" style="max-width:520px">
+    <button class="m-close" onclick="closeModal('prodModal')">✕</button>
+    <div id="prodModalContent"></div>
+  </div>
+</div>
+
+<!-- AI Tool modal (Resume, Logo, etc.) -->
+<div class="modal-ov" id="atoolModal">
+  <div class="modal-box" style="max-width:600px;max-height:90vh;overflow-y:auto">
+    <button class="m-close" onclick="closeModal('atoolModal')">✕</button>
+    <div id="atoolContent"></div>
+  </div>
+</div>
+
+<!-- Welcome Video Tour Modal -->
+<div id="vidModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:3000;align-items:center;justify-content:center;padding:16px">
+  <div class="vm-box">
+    <div class="vm-head">
+      <div>
+        <h2>👋 Welcome to MEERA AI Studio</h2>
+        <p>Quick tour — every feature in 6 minutes</p>
+      </div>
+      <button class="vm-close-btn" onclick="closeVidModal()">✕</button>
+    </div>
+    <div class="vm-presenter">
+      <div id="vmAv" style="width:82px;height:82px;border-radius:50%;background:linear-gradient(135deg,var(--wood),var(--gold));display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;animation:presP 3s ease-in-out infinite">🤖</div>
+      <div class="vm-speech">
+        <h3 id="vmName">Hi! I'm MEERA — your AI Guide</h3>
+        <p id="vmScript">Welcome to MEERA! I'll walk you through all 38+ AI tools, the podcast studio, marketplace, job board, quizzes, student hub, comics, calculators, trivia, workflow training and more. Choose a chapter or hit Play!</p>
+      </div>
+    </div>
+    <div class="vm-player-wrap">
+      <div class="vm-player">
+        <div style="text-align:center;color:#fff">
+          <button class="vm-play-btn" id="vmPlayBtn" onclick="playChapter(curChapter)">▶</button>
+          <h4 id="vmVidTitle" style="font-size:14px;margin-bottom:4px">Click Play to Begin</h4>
+          <p id="vmVidSub" style="font-size:11px;opacity:.6">Chapter 1: Welcome & Overview · 1:30</p>
+        </div>
+        <div class="vm-prog" id="vmProg"><div class="vm-pf" id="vmPF"></div></div>
+      </div>
+    </div>
+    <div style="padding:0 20px 14px"><h3 style="font-size:14px;margin-bottom:10px;color:var(--text)">📚 Tour Chapters</h3></div>
+    <div class="ch-list" id="chList"></div>
+    <div class="vm-foot">
+      <button class="btn btn-p btn-sm" onclick="closeVidModal();openModal('regModal')">🚀 Start Free Trial</button>
+      <button class="btn btn-o btn-sm" onclick="closeVidModal();nav('studio')">🎬 Explore Tools</button>
+      <button class="btn btn-o btn-sm" onclick="closeVidModal()">Skip Tour</button>
+    </div>
+  </div>
+</div>
+
+<!-- Daily quote card (slides in like phone notif) -->
+<div id="quoteCard">
+  <div class="qch">
+    <div class="qch-ico" id="qCardIco">✨</div>
+    <div><div class="qch-app" id="qCardApp">MEERA · Daily Quote</div><div class="qch-time" id="qCardTime">Just now</div></div>
+    <button class="qch-close" onclick="closeQCard()">✕</button>
+  </div>
+  <div class="qcb">
+    <div class="qc-tag" id="qCardTag">✨ Motivational</div>
+    <blockquote class="qc-quote" id="qCardQ">"The secret of getting ahead is getting started."</blockquote>
+    <div class="qc-author" id="qCardAuth">— Mark Twain</div>
+    <div class="qc-acts">
+      <button class="qca" onclick="shareQCard()">📤 Share</button>
+      <button class="qca" onclick="copyQCard()">📋 Copy</button>
+      <button class="qca-next" onclick="nextQCard()">Next ›</button>
+    </div>
+  </div>
+</div>
+
+<!-- Social proof popup -->
+<div id="socialProof"><div class="sp-av" id="spAv">🎬</div><div id="spTxt" style="font-size:11px"><strong>ChidiCreates</strong> just joined MEERA!</div></div>
+
+<!-- Chatbot button -->
+<button id="chatBtn" onclick="toggleChat()" aria-label="Open AI chatbot">🤖</button>
+
+<!-- Chatbot popup -->
+<div id="chatPopup">
+  <div class="ch-head"><h4>🤖 MEERA Assistant</h4><button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:15px;cursor:pointer">✕</button></div>
+  <div class="ch-msgs" id="chatMsgs"><div class="cmsg bot">Hi! 👋 Ask me anything about MEERA — tools, plans, podcast, jobs, quizzes, or how to earn money!</div></div>
+  <div class="ch-inp">
+    <input type="text" id="chatInput" placeholder="Ask a question…" onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button onclick="sendChat()">Send</button>
+  </div>
+</div>
+
+<!-- Tour button (fixed bottom-left, shows after socialProof hides) -->
+<button id="tourBtn" onclick="openVidModal()"><span style="font-size:15px">▶</span> Watch Tour</button>
+
+<!-- Toast notification -->
+<div id="toast"></div>
+
+<!-- ══ EXTERNAL SCRIPTS ═══════════════════════════════════════ -->
+<!-- Paystack (loads payment popup) -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<!-- Chart.js (analytics chart in dashboard) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<!-- Main app JS (separated file) -->
+<script src="app.js"></script>
+
+<!-- Inline CSS for video modal animation (not in styles.css — needed before JS loads) -->
+<style>
+@keyframes presP{0%,100%{box-shadow:0 0 0 4px rgba(212,168,83,.3)}50%{box-shadow:0 0 0 10px rgba(212,168,83,.1)}}
+@keyframes mIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes vp{from{width:0}to{width:100%}}
+</style>
+</body>
+</html>

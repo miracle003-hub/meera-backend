@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../meera_code1"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "node.js"
+	}
+}
