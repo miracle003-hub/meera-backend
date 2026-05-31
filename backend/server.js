@@ -1304,6 +1304,78 @@ app.use((req, res) => {
   });
 });
 
+// POST /api/ai/convert-video
+// Takes: { videoUrl, style, prompt }
+// Returns: { outputUrl } — the AI-converted video
+
+app.post('/api/ai/convert-video', requireAuth, async (req, res) => {
+  const { videoUrl, style, prompt } = req.body;
+
+  try {
+    // Uses the Stable Video Diffusion model on Replicate
+    const response = await axios.post(
+      'https://api.replicate.com/v1/predictions',
+      {
+        version: "3f0457e4619daac51203dedb472816fd4af51f3149fa7a9e0b5ffcf1b8172438",
+        input: {
+          video_path: videoUrl,
+          // prompt describes the style you want
+          prompt: prompt || `Convert to ${style || 'cinematic AI movie'} style`,
+          num_frames: 25,
+          fps: 8
+        }
+      },
+      {
+        headers: {
+          Authorization: `Token ${process.env.REPLICATE_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    // Replicate processes async — returns a prediction ID
+    // Poll this ID to get the output when ready
+    res.json({
+      success:      true,
+      predictionId: response.data.id,
+      status:       'processing',
+      message:      'Video conversion started. Check back in 60–120 seconds.'
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Video conversion failed: ' + err.message
+    });
+  }
+});
+
+// GET /api/ai/convert-video/:id
+// Poll this to check if the converted video is ready
+
+app.get('/api/ai/convert-video/:id', requireAuth, async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://api.replicate.com/v1/predictions/${req.params.id}`,
+      { headers: { Authorization: `Token ${process.env.REPLICATE_API_KEY}` } }
+    );
+
+    const { status, output, error } = response.data;
+
+    if (status === 'succeeded') {
+      res.json({ success: true, status: 'done', outputUrl: output });
+    } else if (status === 'failed') {
+      res.json({ success: false, status: 'failed', message: error });
+    } else {
+      res.json({ success: true, status: 'processing' });
+    }
+
+  } catch (err) {
+    res.status(500).json({ success: false });
+  }
+});
+
+
 // ── STEP 12: START THE SERVER ────────────────────────────────────
 app.listen(PORT, () => {
   console.log('');
