@@ -288,6 +288,64 @@
 
     <!-- Podcast feature cards -->
     <div class="pod-grid" id="podGrid"><!-- JS renders --></div>
+
+<!-- VIDEO PODCAST RECORDER — add inside #podcast section -->
+<div class="form-card" id="podRecorder" style="margin-bottom:28px">
+  <h3 style="margin-bottom:18px;font-size:17px">🎙️ Record Your Video Podcast</h3>
+
+  <!-- Live preview of webcam -->
+  <video id="podPreview" autoplay muted playsinline
+    style="width:100%;border-radius:var(--r2);background:#111;
+           aspect-ratio:16/9;margin-bottom:14px;display:none">
+  </video>
+
+  <!-- Recorded playback -->
+  <video id="podPlayback" controls
+    style="width:100%;border-radius:var(--r2);margin-bottom:14px;display:none">
+  </video>
+
+  <!-- Controls -->
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+    <button class="btn btn-p" id="startCamBtn" onclick="startCamera()">
+      📷 Start Camera
+    </button>
+    <button class="btn btn-p" id="recordBtn" onclick="startRecording()"
+      style="display:none;background:#e53e3e">
+      🔴 Start Recording
+    </button>
+    <button class="btn btn-o" id="stopBtn" onclick="stopRecording()"
+      style="display:none">
+      ⏹ Stop Recording
+    </button>
+    <button class="btn btn-o" id="downloadBtn" onclick="downloadRecording()"
+      style="display:none">
+      💾 Download MP4
+    </button>
+  </div>
+
+  <!-- Episode details -->
+  <div id="podPublishForm" style="display:none">
+    <div class="fg"><label>Episode Title</label>
+      <input type="text" id="podEpTitle" placeholder="e.g. Tech Africa Ep.1 — AI for Beginners"/>
+    </div>
+    <div class="fg"><label>Description</label>
+      <textarea id="podEpDesc" placeholder="What is this episode about?"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-p" onclick="publishPodcast('youtube')">
+        <i class="fab fa-youtube"></i> Publish to YouTube
+      </button>
+      <button class="btn btn-tt" onclick="publishPodcast('tiktok')">
+        <i class="fab fa-tiktok"></i> Publish to TikTok
+      </button>
+      <button class="btn btn-fb" onclick="publishPodcast('facebook')">
+        <i class="fab fa-facebook"></i> Publish to Facebook
+      </button>
+    </div>
+  </div>
+</div>
+
+
   </div>
 </section>
 
