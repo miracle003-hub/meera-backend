@@ -96,10 +96,7 @@ const upload = multer({
 // MongoDB Atlas (free cloud database) — get URI from mongodb.com/atlas
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/meera_ai';
 
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser:    true,
-  useUnifiedTopology: true
-})
+mongoose.connect(MONGO_URI)
 .then(() => console.log('✅ MongoDB connected!'))
 .catch(err => {
   console.error('❌ MongoDB connection failed:', err.message);
