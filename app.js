@@ -31,7 +31,7 @@ let triviaAnswered = false;
 
 // Keys — replace with real ones
 const PAYSTACK_KEY = 'pk_test_4f3f5348a5c83839baba2afbc91fbac24df7badb';
-const API_BASE     = 'http://localhost:5000';
+const API_BASE     = '';
 
 // ── 2. QUOTES DATABASE ──────────────────────────────────────────
 const QUOTES = {
