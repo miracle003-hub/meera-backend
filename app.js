@@ -1892,6 +1892,198 @@ async function convertVideoToAI() {
   }, 5000); // check every 5 seconds
 }
 
+// ── VIDEO PODCAST RECORDER ───────────────────────────────────────
+let mediaStream    = null;  // webcam + mic stream
+let mediaRecorder  = null;  // recorder object
+let recordedChunks = [];    // video data chunks
+let recordedBlob   = null;  // final video blob
+
+// Step 1: request camera + microphone access
+async function startCamera() {
+  try {
+    // Ask browser for webcam and microphone permission
+    mediaStream = await navigator.mediaDevices.getUserMedia({
+      video: { width: 1280, height: 720, facingMode: 'user' },
+      audio: { echoCancellation: true, noiseSuppression: true }
+    });
+
+    // Show live preview in the video element
+    const preview = document.getElementById('podPreview');
+    preview.srcObject = mediaStream;
+    preview.style.display = 'block';
+
+    // Show/hide buttons
+    document.getElementById('startCamBtn').style.display = 'none';
+    document.getElementById('recordBtn').style.display   = 'inline-flex';
+
+    showToast('📷 Camera ready! Click Start Recording when you are ready.');
+
+  } catch (err) {
+    // User denied permission or no camera found
+    showToast('❌ Camera access denied. Please allow camera and microphone in your browser settings.');
+    console.error('Camera error:', err);
+  }
+}
+
+// Step 2: start recording
+function startRecording() {
+  if (!mediaStream) { showToast('⚠️ Start your camera first.'); return; }
+
+  recordedChunks = [];
+
+  // Create recorder — use webm format (works in all modern browsers)
+  mediaRecorder = new MediaRecorder(mediaStream, {
+    mimeType: 'video/webm;codecs=vp9,opus'
+  });
+
+  // Collect video data as it records
+  mediaRecorder.ondataavailable = (event) => {
+    if (event.data && event.data.size > 0) {
+      recordedChunks.push(event.data);
+    }
+  };
+
+  // When recording stops, create the final video file
+  mediaRecorder.onstop = () => {
+    recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+    const url    = URL.createObjectURL(recordedBlob);
+
+    // Show playback of the recording
+    const playback = document.getElementById('podPlayback');
+    playback.src   = url;
+    playback.style.display = 'block';
+
+    // Show download and publish buttons
+    document.getElementById('downloadBtn').style.display  = 'inline-flex';
+    document.getElementById('podPublishForm').style.display = 'block';
+
+    showToast('✅ Recording saved! Preview it below, then publish or download.');
+  };
+
+  // Start recording — collect data every 1 second
+  mediaRecorder.start(1000);
+
+  // Update button states
+  document.getElementById('recordBtn').style.display = 'none';
+  document.getElementById('stopBtn').style.display   = 'inline-flex';
+
+  // Show recording timer
+  startRecordingTimer();
+  showToast('🔴 Recording started! Speak clearly into your microphone.');
+}
+
+// Step 3: stop recording
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.stop();
+  }
+  stopRecordingTimer();
+  document.getElementById('stopBtn').style.display   = 'none';
+  document.getElementById('recordBtn').style.display = 'inline-flex';
+}
+
+// Step 4: download the recording
+function downloadRecording() {
+  if (!recordedBlob) { showToast('⚠️ No recording found.'); return; }
+  const a    = document.createElement('a');
+  a.href     = URL.createObjectURL(recordedBlob);
+  a.download = (document.getElementById('podEpTitle')?.value || 'podcast-episode') + '.webm';
+  a.click();
+  showToast('💾 Downloading your podcast episode!');
+}
+
+// ── RECORDING TIMER ──────────────────────────────────────────────
+let recTimerInterval = null;
+let recSeconds       = 0;
+
+function startRecordingTimer() {
+  recSeconds = 0;
+  recTimerInterval = setInterval(() => {
+    recSeconds++;
+    const m = Math.floor(recSeconds / 60).toString().padStart(2,'0');
+    const s = (recSeconds % 60).toString().padStart(2,'0');
+    const btn = document.getElementById('stopBtn');
+    if (btn) btn.textContent = `⏹ Stop — ${m}:${s}`;
+  }, 1000);
+}
+
+function stopRecordingTimer() {
+  clearInterval(recTimerInterval);
+  const btn = document.getElementById('stopBtn');
+  if (btn) btn.textContent = '⏹ Stop Recording';
+}
+
+// ── UPLOAD AND PUBLISH ───────────────────────────────────────────
+// Updated publishPodcast — now uploads the recorded video first
+
+async function publishPodcast(platform) {
+  if (!currentUser) {
+    showToast('🔒 Log in to publish your podcast.');
+    openModal('loginModal');
+    return;
+  }
+
+  const title = document.getElementById('podEpTitle')?.value?.trim();
+  const desc  = document.getElementById('podEpDesc')?.value?.trim();
+
+  if (!title) {
+    showToast('⚠️ Please add an episode title before publishing.');
+    return;
+  }
+
+  // If user recorded in browser, upload blob to server first
+  let videoUrl = null;
+
+  if (recordedBlob) {
+    showToast(`⏳ Uploading to ${platform}… this may take a moment.`);
+
+    const formData = new FormData();
+    formData.append('video', recordedBlob, title + '.webm');
+    formData.append('title', title);
+    formData.append('desc',  desc || '');
+
+    try {
+      const uploadRes  = await fetch(API_BASE + '/api/podcast/upload', {
+        method: 'POST',
+        body:   formData,
+        headers: { Authorization: `Bearer ${localStorage.getItem('meeraToken')}` }
+      });
+      const uploadData = await uploadRes.json();
+      videoUrl         = uploadData.url;
+    } catch (err) {
+      showToast('❌ Upload failed. Check your internet connection.');
+      return;
+    }
+  }
+
+  // Now publish to the chosen platform
+  try {
+    const res  = await fetch(`${API_BASE}/api/podcast/publish/${platform}`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${localStorage.getItem('meeraToken')}` },
+      body:    JSON.stringify({ title, description: desc, videoUrl })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      showToast(`🎉 Published to ${platform}! ${data.videoUrl ? 'View: ' + data.videoUrl : ''}`);
+    } else {
+      // Fallback — open platform manually
+      const urls = {
+        youtube:  'https://studio.youtube.com',
+        tiktok:   'https://www.tiktok.com/upload',
+        facebook: 'https://www.facebook.com/video/upload'
+      };
+      showToast(`⚠️ Auto-publish needs API approval. Opening ${platform} to upload manually.`);
+      setTimeout(() => window.open(urls[platform], '_blank'), 1200);
+    }
+  } catch (err) {
+    showToast('❌ Publish failed. Check your backend is running.');
+  }
+}
+
+
 
 // ── 44. SOCIAL PROOF POPUP ───────────────────────────────────────
 function showSocialProof() {
