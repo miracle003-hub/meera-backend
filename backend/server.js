@@ -50,6 +50,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Serve uploaded files publicly
 // e.g. http://localhost:5000/uploads/products/my-image.jpg
+app.use(express.static('../'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Create upload folders if they don't exist
