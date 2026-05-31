@@ -3,6 +3,9 @@
 // All frontend JavaScript for every section
 // ================================================================
 
+const console = require("console");
+const { clearInterval } = require("timers");
+
 // ── 1. GLOBAL STATE ─────────────────────────────────────────────
 let currentUser  = null;
 let curSlide     = 0;
@@ -1848,6 +1851,47 @@ function playChapter(i) {
     }
   }, ms);
 }
+async function convertVideoToAI() {
+  const fileInput = document.getElementById('convertVideoFile');
+  const style     = document.getElementById('convertStyle').value;
+  const file      = fileInput.files[0];
+  if (!file) { showToast('⚠️ Please select a video file first.'); return; }
+
+  showToast('⏳ Uploading and converting… this takes 1–2 minutes.');
+
+  // Step 1: upload file to your server first
+  const formData = new FormData();
+  formData.append('video', file);
+  const uploadRes  = await fetch(API_BASE + '/api/upload/video', {
+    method: 'POST', body: formData
+  });
+  const uploadData = await uploadRes.json();
+  const videoUrl   = uploadData.url; // hosted URL of uploaded video
+
+  // Step 2: send to AI conversion
+  const convRes  = await fetch(API_BASE + '/api/ai/convert-video', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ videoUrl, style, prompt: `${style} cinematic style` })
+  });
+  const convData = await convRes.json();
+
+  // Step 3: poll until done
+  const pollId = setInterval(async () => {
+    const pollRes  = await fetch(API_BASE + '/api/ai/convert-video/' + convData.predictionId);
+    const pollData = await pollRes.json();
+    if (pollData.status === 'done') {
+      clearInterval(pollId);
+      document.getElementById('convertOutput').src = pollData.outputUrl;
+      document.getElementById('convertOutput').style.display = 'block';
+      showToast('🎬 AI video conversion complete!');
+    } else if (pollData.status === 'failed') {
+      clearInterval(pollId);
+      showToast('❌ Conversion failed. Try a shorter clip.');
+    }
+  }, 5000); // check every 5 seconds
+}
+
 
 // ── 44. SOCIAL PROOF POPUP ───────────────────────────────────────
 function showSocialProof() {
