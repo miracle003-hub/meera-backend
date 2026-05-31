@@ -1375,6 +1375,49 @@ app.get('/api/ai/convert-video/:id', requireAuth, async (req, res) => {
   }
 });
 
+// POST /api/podcast/upload
+// Receives the recorded webm video from the browser
+// Stores it and returns a public URL
+
+app.post('/api/podcast/upload',
+  requireAuth,
+  upload.single('video'),
+  async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ success:false, message:'No video file received.' });
+      }
+
+      // Build the public URL for this file
+      const fileUrl  = `/uploads/podcast/${req.file.filename}`;
+      const fullUrl  = `${process.env.SITE_URL || 'http://localhost:5000'}${fileUrl}`;
+
+      // Save podcast record to database
+      const podcast = new Podcast({
+        userId:      req.userId,
+        title:       req.body.title || 'Untitled Episode',
+        description: req.body.desc  || '',
+        audioUrl:    fullUrl,
+        createdAt:   new Date()
+      });
+      await podcast.save();
+
+      res.json({
+        success:   true,
+        url:       fullUrl,
+        podcastId: podcast._id,
+        message:   'Episode uploaded successfully!'
+      });
+
+    } catch (err) {
+      console.error('Podcast upload error:', err);
+      res.status(500).json({ success: false, message: 'Upload failed.' });
+    }
+  }
+);
+
+
+
 
 // ── STEP 12: START THE SERVER ────────────────────────────────────
 app.listen(PORT, () => {
